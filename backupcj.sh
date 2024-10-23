@@ -27,19 +27,20 @@ while true; do
         echo "Backup directory not found, creating backup directory..." | tee -a "$logfile"
         mkdir -p "$backupdir"
     fi
-    
-    if [ $(ls -l "$backupdir" | grep ^d | wc -l) -gt "$maxbackups" ]; then
-        oldest=$(ls -lt "$backupdir" | grep ^d | tail -n 1 | awk '{print $9}')
-        echo "Removing oldest backup: $oldest" | tee -a "$logfile"
-        rm -rf "$backupdir/$oldest"
-    fi
 
     ls -lR "$dir" > directory-info.new
     if ! cmp -s directory-info.last directory-info.new; then
         perform_backup
         mv directory-info.new directory-info.last
     else
+        echo "No changes detected" | tee -a "$logfile"
         rm directory-info.new
+    fi
+
+    if [ $(ls -l "$backupdir" | grep ^d | wc -l) -gt "$maxbackups" ]; then
+        oldest=$(ls -lt "$backupdir" | grep ^d | tail -n 1 | awk '{print $9}')
+        echo "Removing oldest backup: $oldest" | tee -a "$logfile"
+        rm -rf "$backupdir/$oldest"
     fi
 
     sleep "$interval"
