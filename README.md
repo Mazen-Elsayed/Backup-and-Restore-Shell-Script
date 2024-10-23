@@ -63,7 +63,6 @@
   ## How to run the Cronjob
   - open the Terminal.
   - enter the command `crontab -e`, if a choice pops up press 1 and then enter
-  - a nano window will open, enter the line at the end of the script `* * * * * "/root/Operating System/8247-Lab2/backupcj.sh" "/root/Operating System/8247-Lab2/cronjobdir" "/root/Operating System/8247-Lab2/cronjobdirbackup" 60 5 >> "/root/Operating System/8247-Lab2/cronjobdirbackup/backup.logs" 2>&1`;
-  with the paths of files in your computer of course...
+  - a nano window will open, enter the line at the end of the script `* * * * * /root/Operating\ System/8247-Lab2/backupcj.sh /root/Operating\ System/8247-Lab2/cronjobdir /root/Operating\ System/8247-Lab2/cronjobdirbackup 60 5 /root/Operating\ System/8247-Lab2/cronjobdirbackup/backup.logs` with the paths of files in your computer of course...
   - press `ctrl + s` , `ctrl + O` , `enter` and then `ctrl + X`
   - cronjob should be running; to make sure type the command: `sudo crontab -l` or open the logfiles to see the logs of the script
