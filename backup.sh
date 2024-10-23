@@ -27,6 +27,18 @@ while true; do
         echo "Backup directory not found, creating backup directory..."
         mkdir -p "$backupdir"
     fi
+
+    # ba check law feh t8yerat fel directory
+    # lw feh t8yerat b3ml backup w b3ml update lel directory-info.last
+    ls -lR "$dir" > directory-info.new
+    if ! cmp -s directory-info.last directory-info.new; then
+        perform_backup
+        mv directory-info.new directory-info.last
+    else
+        echo "No changes detected."
+        rm directory-info.new
+    fi
+
     # ba check law el maxbackups akbar mn el backups el mawgoda w law kda delete el oldest backup 
     # grep ^d de by3ml filter 3la el directories
     # tail -n 1 bta5od akher directory
@@ -36,16 +48,6 @@ while true; do
         oldest=$(ls -lt "$backupdir" | grep ^d | tail -n 1 | awk '{print $9}')
         echo "Removing oldest backup: $oldest"
         rm -rf "$backupdir/$oldest"
-    fi
-
-    # ba check law feh t8yerat fel directory
-    # lw feh t8yerat b3ml backup w b3ml update lel directory-info.last
-    ls -lR "$dir" > directory-info.new
-    if ! cmp -s directory-info.last directory-info.new; then
-        perform_backup
-        mv directory-info.new directory-info.last
-    else
-        rm directory-info.new
     fi
 
     sleep "$interval"

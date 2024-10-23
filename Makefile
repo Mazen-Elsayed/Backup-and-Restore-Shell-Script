@@ -1,6 +1,6 @@
 SRC_DIR := makedir
 BACKUP_DIR := makedirbackup
-INTERVAL := 60 
+INTERVAL := 15 
 MAX_BACKUPS := 5  
 
 run_backup:

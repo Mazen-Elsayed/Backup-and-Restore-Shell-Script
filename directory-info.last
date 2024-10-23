@@ -1,5 +1,17 @@
 makedir:
+total 4
+drwxr-xr-x 3 root root 4096 Oct 23 11:23 makedir
+
+makedir/makedir:
+total 4
+drwxr-xr-x 3 root root 4096 Oct 23 11:23 makedir
+
+makedir/makedir/makedir:
+total 4
+drwxr-xr-x 2 root root 4096 Oct 23 11:23 makedir
+
+makedir/makedir/makedir/makedir:
 total 12
--rw-r--r-- 1 root root 51 Oct 18 15:18 list.txt
--rw-r--r-- 1 root root 88 Oct 18 15:18 textfile1.txt
--rw-r--r-- 1 root root 93 Oct 18 15:18 textfile2.txt
+-rw-r--r-- 1 root root 39 Oct 23 11:23 list.txt
+-rw-r--r-- 1 root root 63 Oct 23 11:23 textfile1.txt
+-rw-r--r-- 1 root root 54 Oct 23 11:23 textfile2.txt
