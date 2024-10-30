@@ -16,7 +16,7 @@ elif [ ! -d "$bkp_dir" ]; then
     echo "The backup directory doesn't exist."
     exit 1
 fi
-
+# -f bt3ml check law el file mawgood
 if [ -f "$index_file" ]; then
     current_index=$(<"$index_file")
 else
@@ -24,7 +24,7 @@ else
 fi
 
 # ba7ot kol el backups fel array "all_backups"
-all_backups=($(ls -t "$bkp_dir")) # ls -t bt3ml sort lel files bta3t el directory bta3t el backup
+all_backups=($(ls -t "$bkp_dir")) # ls -t bt3ml sort lel files bta3t el directory bta3t el backup bel timestamp order
 if [ ${#all_backups[@]} -eq 0 ]; then
     echo "No backups available in ${bkp_dir}"
     exit 1
@@ -42,9 +42,12 @@ while true; do
     case $choice in
         1)  if [ ${#all_backups[@]} -gt 1 ] && [ $current_index -lt $((${#all_backups[@]} - 1)) ]; then # law feh at least 2 backups
                 previous_backup="${all_backups[$((current_index + 1))]}"                                # w law el current index akbar mn 0
+                # -rf force removes el content bta3t el source directory
                 rm -rf "$src_dir"/* # ba delete el contents bta3t el source directory
+                # -s sets el dotglob option
                 shopt -s dotglob # b3ml enable lel dotglob 3shan a3rf a3ml copy lel hidden files (mashtaghalsh mngheirha)
                 cp -r "$bkp_dir/$previous_backup/"* "$src_dir/" # b3ml copy lel contents bta3t el previous backup lel source directory
+                # -u unsets el dotglob option
                 shopt -u dotglob 
                 current_index=$((current_index + 1)) # b3ml update lel current index
                 echo "Restoration of $previous_backup complete"
